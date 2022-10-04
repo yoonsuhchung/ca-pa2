@@ -103,7 +103,7 @@ Since the result `M` is not in a normalized form, `M` is shifted left by one bit
 
 Now we perform the rounding. In this case, 1.111111111 is located in the middle of 1.11111111 and (1.11111111 + 0.00000001 or 10.00000000) and we need to round up to the even number 10.00000000 according to the round-to-even mode.
 
-As a result of this rounding, `M` is no longer in a normalized form. And we have to normalize `M` again as follows.
+As a result of this rounding, `M` is no longer in a normalized form and we have to normalize `M` again as follows.
 
 ```
       M:  0.1111111111        ; E  = -52
@@ -138,7 +138,7 @@ Fortunately, we can produce the same result by maintaining only three extra bits
       R_bit <- G_bit
       G_bit <- b
    ```
-   In any case, the exponent of the result should be adjusted accordingly.
+   In any case, the exponent of the result, `E`, should be adjusted accordingly.
 
 5. The next step is to perform rounding. The main role of the guard bit is to fill in the least-significant bit (`p`-th bit) of the result when necessary. Depending on the situation, the original guard bit in the step 3 may have moved to the left or right direction during normalization. But in any case, the role of the guard bit is over after the normalization step. Hence, we adjust the round bit and the sticky bit as follows:
    ```
